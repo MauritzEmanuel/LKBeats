@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois&display=swap');
+@import "tailwindcss";
+
+
+@theme {
+    --color-primary: #C61ED9;
+    --color-secondary: #616161;
+
+    --font-jacq: 'Jacques Francois', ui-sans-serif, system-ui;
+}
