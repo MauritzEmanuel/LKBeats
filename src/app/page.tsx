@@ -1,4 +1,5 @@
 'use client'
+import { BeatList } from "@/components/beatList";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -15,6 +16,7 @@ export default function Home() {
 
     <div className="flex flex-col items-center">
       <h1 className="font-jacq text-center text-5xl mt-14">Featured Tracks</h1>
+      <BeatList/>
 
 
       <h1 className="font-jacq text-center text-5xl mt-14">Want to order a beat?</h1>
@@ -25,6 +27,8 @@ export default function Home() {
       }}>
         <h1 className="text-center font-jacq text-white text-3xl">Contact Me</h1>
       </div>
+
+      <div className="mt-50"></div>
     </div>
   );
 }
