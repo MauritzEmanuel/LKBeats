@@ -31,6 +31,7 @@ export default function Login() {
     
         if (error) {
             setErrorMsg('Invalid email or password.');
+            setIsSubmitting(false);
         } else {
             // Vänta på att sessionen ska sättas
             const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
