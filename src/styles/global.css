@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois&display=swap');
+@import "tailwindcss";
+
+
+@theme {
+    --color-primary: #C61ED9;
+    --color-secondary: #616161;
+
+    --font-jacq: 'Jacques Francois', ui-sans-serif, system-ui;
+}
+
+.custom-player .rhap_time {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 0.25rem;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.custom-player .rhap_current-time::after {
+  content: " / ";
+  padding: 0 2px;
+}
+
+.custom-player .rhap_progress-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.custom-player .rhap_play-pause-button {
+    font-size: 3rem;
+    color: #C61ED9;
+    margin-block: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-self: center;
+}
+
+.custom-player .rhap_progress-bar,
+.custom-player .rhap_progress-indicator,
+.custom-player .rhap_download-progress {
+  display: none !important;
+}
