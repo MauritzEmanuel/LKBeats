@@ -62,35 +62,35 @@ export default function Login() {
 
     return(
         <div className="min-h-screen flex items-center justify-center  text-white">
-        <form onSubmit={handleLogin} className="bg-black p-8 rounded-xl shadow-lg w-96 flex flex-col gap-4">
-          <h2 className="text-2xl font-bold mb-2 text-center">Logga in</h2>
-          {errorMsg && <p className="text-red-500 text-sm text-center">{errorMsg}</p>}
-          <input
-            type="email"
-            placeholder="E-post"
-            className="p-3 rounded bg-gray-800 border border-gray-600 focus:outline-primary"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Lösenord"
-            className="p-3 rounded bg-gray-800 border border-gray-600 focus:outline-primary"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button
-            type="submit"
-            className={`bg-primary hover:bg-fuchsia-700 text-white font-semibold py-2 rounded ${
-                isSubmitting ? 'cursor-wait opacity-70' : 'cursor-pointer'
-              }`}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Loging in...' : 'Log in'}
-          </button>
-        </form>
-      </div>
+            <form onSubmit={handleLogin} className="bg-black p-8 rounded-xl shadow-lg w-96 flex flex-col gap-4">
+                <h2 className="text-2xl font-bold mb-2 text-center">Logga in</h2>
+                {errorMsg && <p className="text-red-500 text-sm text-center">{errorMsg}</p>}
+                <input
+                    type="email"
+                    placeholder="E-post"
+                    className="p-3 rounded bg-gray-800 border border-gray-600 focus:outline-primary"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Lösenord"
+                    className="p-3 rounded bg-gray-800 border border-gray-600 focus:outline-primary"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button
+                    type="submit"
+                    className={`bg-primary hover:bg-fuchsia-700 text-white font-semibold py-2 rounded ${
+                        isSubmitting ? 'cursor-wait opacity-70' : 'cursor-pointer'
+                    }`}
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Loging in...' : 'Log in'}
+                </button>
+            </form>
+        </div>
     );
 }

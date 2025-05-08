@@ -1,5 +1,6 @@
 'use client'
 
+import BeatForm from "@/components/beatForm";
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation";
 import React from "react"
@@ -21,12 +22,16 @@ export default function BackOffice() {
     }
 
     return(
-        <div>
+        <div className="flex flex-col justify-center items-center">
+            <div className="my-10">
+                <BeatForm/>
+            </div>
+            
             <button
                 onClick={handleLogout}
-                className="px-4 py-2 bg-red-500 text-white rounded"
+                className="px-4 py-2 bg-red-500 text-white rounded cursor-pointer mb-5"
             >
-                Logga ut
+                Log out
             </button>
         </div>
     )
