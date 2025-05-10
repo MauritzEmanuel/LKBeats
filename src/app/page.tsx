@@ -1,9 +1,17 @@
 'use client'
 import { BeatList } from "@/components/beatList";
-import Image from "next/image";
+import { CustomPlayer } from "@/components/player";
+import { Beat } from "@/types/beat";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
+
+  const [selectedBeat, setSelectedBeat] = useState<Beat | null>(null);
+
+  const handlePlay = (beat: Beat) => {
+    setSelectedBeat(beat);
+  }
 
   const router = useRouter()
 
@@ -13,10 +21,9 @@ export default function Home() {
 
 
   return (
-
     <div className="flex flex-col items-center">
       <h1 className="font-jacq text-center text-5xl mt-14">Featured Tracks</h1>
-      <BeatList/>
+      <BeatList onPlay={handlePlay}/>
 
 
       <h1 className="font-jacq text-center text-5xl mt-14">Want to order a beat?</h1>
@@ -29,6 +36,7 @@ export default function Home() {
       </div>
 
       <div className="mt-50"></div>
+      {selectedBeat && <CustomPlayer beat={selectedBeat} onClose={() => setSelectedBeat(null)}/>}
     </div>
   );
 }

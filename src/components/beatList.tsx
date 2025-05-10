@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
+import { Beat } from "@/types/beat";
 
-type Beat = {
-    id: number;
-    title: string;
-    price: number;
-    image_url: string;
-    audio_url: string;
-  };
+type BeatListProps = {
+    onPlay: (beat: Beat) => void;
+}
 
-export const BeatList = () => {
+
+export const BeatList = ({onPlay}: BeatListProps) => {
     const [ beats, setBeats ] = useState<Beat[]>([]);
 
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -34,7 +32,12 @@ export const BeatList = () => {
         const fetchData = async () => {
             const respone = await fetch('/api/beats');
             const data = await respone.json();
-            setBeats(data)
+
+            const sorted = data.sort(
+                (a: Beat, b: Beat) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+            );
+
+            setBeats(sorted)
         }
 
         fetchData();
@@ -57,9 +60,12 @@ export const BeatList = () => {
                             src={beat.image_url}
                             alt="Cover"
                             className="w-full h-full object-cover rounded-2xl"
+                            style={{
+                                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)'
+                            }}
                             />
                             <button
-                            onClick={() => console.log("Spela upp:", beat.audio_url)}
+                            onClick={() => onPlay(beat)}
                             className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                             >
                                 <PlayCircleIcon className="w-16 h-16 text-primary drop-shadow-lg" />
@@ -69,7 +75,7 @@ export const BeatList = () => {
                             <h1 className="text-xl font-semibold">{beat.title}</h1>
                         </div>
                         <div className="w-full ml-15">
-                            <h1 className="text-l font-medium">{beat.price} SEK</h1>
+                            <h1 className="text-sm font-small">{beat.price} SEK</h1>
                         </div>
                         <button className="w-40 h-10 bg-[#2DCEF6] text-white font-semibold rounded-3xl mt-auto mb-5 cursor-pointer">Add to cart</button>
                     </div>
