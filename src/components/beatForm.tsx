@@ -137,10 +137,7 @@ export default function BeatForm() {
                         ) : ('Upload Audio')}
                         {audioError && <p className="text-red-500 text-sm mt-2">{audioError}</p>}
                 </label>
-            </div>
-
-            
-
+            </div>            
 
             <input
                 className='bg-white text-black rounded my-1'
