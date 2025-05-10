@@ -13,6 +13,7 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
     const inactivityRef = useRef<NodeJS.Timeout | null>(null);
     const [isPlaying, setIsPlaying] = useState(true);
     const [volume, setVolume] = useState(0.75);
+    const [isMuted, setIsMuted] = useState(false);
 
     const handlePlay = () => {
         if (isPlaying){
@@ -26,8 +27,12 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
     }
 
     const handleMute = () => {
-        if(audioRef.current)
-            audioRef.current.muted = true;
+        if(audioRef.current){
+            const nextMuted = !audioRef.current.muted;
+            audioRef.current.muted = nextMuted;
+            setIsMuted(nextMuted);
+        }
+            
     }
 
     const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,8 +89,8 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
                 }
             </button>
             <div className="h-[80%] w-[40%] flex justify-end">
-                <button onClick={handleMute}>
-                    <SpeakerWaveIcon className="h-7 w-7 mr-2"/>
+                <button onClick={handleMute} className="cursor-pointer">
+                    {!isMuted ? <SpeakerWaveIcon className="h-7 w-7 mr-2"/> : <SpeakerXMarkIcon className="h-7 w-7 mr-2"/>}
                 </button>
                 <input 
                 className="w-20 mr-3"
