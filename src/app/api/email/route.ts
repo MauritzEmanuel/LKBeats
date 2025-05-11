@@ -10,7 +10,7 @@ export async function POST(req: Request) {
         from: 'onboarding@resend.dev',
         to: 'mastaremanuel@gmail.com',
         subject: 'Beat request',
-        text: `Email: ${emailProps.email}, Name: ${emailProps.name} \nMessage: ${emailProps.message}`
+        text: `Email: ${emailProps.email},\nName: ${emailProps.name}\n\nMessage: ${emailProps.message}`
     });
 
     if (error) {

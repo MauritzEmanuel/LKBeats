@@ -6,6 +6,10 @@ export const ContactForm = () => {
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
 
+    const [formMessage, setFormMessage] = useState(<p></p>);
+    const [emailError, setEmailError] = useState(<p></p>);
+    const [isDisabled, setIsDisabled] = useState(false);
+
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
     };
@@ -20,6 +24,19 @@ export const ContactForm = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email || !name || !message) {
+            setFormMessage(<p className="text-red-800 font-semibold">All fields are required.</p>);
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            setEmailError(<p className="text-red-500">Please enter a valid email address.</p>);
+            return;
+        }
+
         try{
             const response = await fetch('/api/email', {
                 method: 'POST',
@@ -28,31 +45,45 @@ export const ContactForm = () => {
             })
 
             const data = await response.json();
+
             if (response.ok) {
-                console.log('Email sent successfully.', data);
-            }
-            else {
-                console.error('Error when sending email.', data.error)
+                setFormMessage(<p className="text-green-500">Request sent.</p>);
+                setIsDisabled(true);
+            } else {
+                setFormMessage(<p className="text-red-500">Error: {data.error || 'Could not send email.'}</p>);
             }
         } catch(error){
             console.error('something went wrong.', error);
+            setFormMessage(<p className="text-red-500">Something went wrong.</p>);
         }
     }
     
 
 
     return(
-        <form onSubmit={handleSubmit}>
-            <div>
-                <input type="email" id="email" onChange={handleEmailChange}/>
+        <form style={{
+        backgroundImage: 'linear-gradient(to right, #C61ED9, #B20050 88%)',
+        }} 
+        onSubmit={handleSubmit} 
+        className="text-white flex flex-col w-200 py-4 my-4 items-center rounded-2xl outline-2 outline-secondary">
+            <h1 className="text-2xl font-jacq font-medium">Beat Request</h1>
+            <div className="flex justify-between w-[70%] mt-3">
+                <div className="w-[40%]">
+                    <label htmlFor="email" className="mr-2">Email</label>
+                    <input placeholder="example@domain.com" type="email" id="email" onChange={handleEmailChange} className="bg-white text-black rounded w-full"/>
+                    {emailError && emailError}
+                </div>
+                <div className="w-[40%]">
+                    <label htmlFor="name" className="mr-2">Name</label>
+                    <input type="text" id="name" onChange={handleNameChange} className="bg-white text-black rounded w-full"/>
+                </div>
             </div>
-            <div>
-                <input type="text" id="name" onChange={handleNameChange} />
+            <div className="flex flex-col w-[70%] my-3">
+                <label htmlFor="message">Message</label>
+                <textarea id="message" onChange={handleMessageChange} className="bg-white text-black rounded"/>
             </div>
-            <div>
-                <textarea id="message" onChange={handleMessageChange}/>
-            </div>
-            <button type="submit">Send</button>
+            <button disabled={isDisabled} type="submit" className="w-20 rounded bg-green-500 cursor-pointer hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50">Send</button>
+            {formMessage && formMessage}
         </form>
     )
 }
