@@ -61,12 +61,13 @@ export const ContactForm = () => {
 
 
     return(
-        <form style={{
-        backgroundImage: 'linear-gradient(to right, #C61ED9, #B20050 88%)',
-        }} 
+        <form 
         onSubmit={handleSubmit} 
-        className="text-white flex flex-col w-200 py-4 my-4 items-center rounded-2xl outline-2 outline-secondary">
-            <h1 className="text-2xl font-jacq font-medium">Beat Request</h1>
+        className="text-white bg-[#B20050] flex flex-col w-200 py-4 my-10 items-center rounded-2xl outline-2 outline-secondary">
+            <h1 className="text-3xl mb-2 font-jacq font-medium">Beat Request</h1>
+            <p className="font-semibold">Come in contact with Ludde K!</p>
+            <p className="text-center w-[70%] my-2">The request should contain an information of how you would like your beat. Give examples of inspiration, genre, tempo, vibe etc.</p>
+            <p>The more information - The better the outcome.</p>
             <div className="flex justify-between w-[70%] mt-3">
                 <div className="w-[40%]">
                     <label htmlFor="email" className="mr-2">Email</label>
@@ -80,7 +81,7 @@ export const ContactForm = () => {
             </div>
             <div className="flex flex-col w-[70%] my-3">
                 <label htmlFor="message">Message</label>
-                <textarea id="message" onChange={handleMessageChange} className="bg-white text-black rounded"/>
+                <textarea id="message" onChange={handleMessageChange} className="bg-white text-black rounded h-40"/>
             </div>
             <button disabled={isDisabled} type="submit" className="w-20 rounded bg-green-500 cursor-pointer hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50">Send</button>
             {formMessage && formMessage}
