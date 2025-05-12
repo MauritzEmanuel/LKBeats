@@ -36,7 +36,7 @@ export const Header = () => {
                     {Options.map((option => (
                         <div
                             key={option.name}
-                            className="h-5.5 w-20 cursor-pointer hover:text-primary bg-white flex justify-center items-center rounded-4xl"
+                            className="h-5.5 w-20 cursor-pointer text-black hover:text-primary bg-white flex justify-center items-center rounded-4xl"
                             onClick={() => router.push(option.path)}>
                             <h3 className="text-center">{option.name}</h3>
                         </div>

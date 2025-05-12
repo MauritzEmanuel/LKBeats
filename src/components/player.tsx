@@ -58,7 +58,7 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
         return () => {
             if (inactivityRef.current) clearTimeout(inactivityRef.current);
         };
-    })
+    }, [isPlaying])
 
 
     if(!beat) return null;

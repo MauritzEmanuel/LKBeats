@@ -1,6 +1,7 @@
 'use client'
 
 import BeatForm from "@/components/beatForm";
+import { BeatListBackoffice } from "@/components/beatListBackoffice";
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation";
 import React from "react"
@@ -23,8 +24,13 @@ export default function BackOffice() {
 
     return(
         <div className="flex flex-col justify-center items-center">
-            <div className="my-10">
+
+            <div className="my-5">
                 <BeatForm/>
+            </div>
+
+            <div className="mb-5">
+                <BeatListBackoffice/>
             </div>
             
             <button
