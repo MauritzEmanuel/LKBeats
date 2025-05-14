@@ -63,7 +63,10 @@ export const ContactForm = () => {
     return(
         <form 
         onSubmit={handleSubmit} 
-        className="text-white bg-[#B20050] flex flex-col w-200 py-4 my-10 items-center rounded-2xl outline-2 outline-secondary">
+        style={{
+            boxShadow: '0px 0px 20px rgba(198, 30, 217, 0.6)'
+        }}
+        className="text-white bg-secondary flex flex-col w-200 py-4 my-10 items-center rounded-2xl">
             <h1 className="text-3xl mb-2 font-jacq font-medium">Beat Request</h1>
             <p className="font-semibold">Come in contact with Ludde K!</p>
             <p className="text-center w-[70%] my-2">The request should contain an information of how you would like your beat. Give examples of inspiration, genre, tempo, vibe etc.</p>
