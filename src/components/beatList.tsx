@@ -22,7 +22,7 @@ export const BeatList = ({onPlay}: BeatListProps) => {
         const cardWidth = firstBeat.offsetWidth + 40;
 
         scrollRef.current.scrollBy({
-            left: direction === 'left' ? -cardWidth : cardWidth,
+            left: direction === 'left' ? -cardWidth * 3 : cardWidth * 3,
             behavior: "smooth",
         });
 

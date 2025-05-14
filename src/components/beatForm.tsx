@@ -16,6 +16,14 @@ export default function BeatForm() {
     const [audioPreview, setAudioPreview] = useState<string | null>(null);
     const [audioError, setAudioError] = useState('');
 
+
+    const sanitizeFileName = (fileName: string) => {
+        return fileName
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-zA-Z0-9.\-_]/g, ''); 
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -28,9 +36,10 @@ export default function BeatForm() {
             let audioPath = null;
 
             if(imageFile) {
+                const safeName = sanitizeFileName(imageFile.name);
                 const { data, error } = await supabase.storage
                     .from('beat-images')
-                    .upload(`images/${Date.now()}-${imageFile.name}`,imageFile)
+                    .upload(`images/${Date.now()}-${safeName}`,imageFile)
 
                 if (error) throw error
                 imageUrl = supabase.storage.from('beat-images').getPublicUrl(data.path).data.publicUrl;
@@ -38,9 +47,10 @@ export default function BeatForm() {
             }
 
             if(audioFile) {
+                const safeName = sanitizeFileName(audioFile.name);
                 const { data, error } = await supabase.storage
                     .from('beat-audio')
-                    .upload(`audios/${Date.now()}-${audioFile.name}`, audioFile)
+                    .upload(`audios/${Date.now()}-${safeName}`, audioFile)
 
                     if (error) throw error;
                     audioUrl = supabase.storage.from('beat-audio').getPublicUrl(data.path).data.publicUrl;
