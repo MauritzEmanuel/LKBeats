@@ -5,4 +5,6 @@ export type Beat = {
     price: number;
     image_url: string;
     audio_url: string;
+    audio_path: string;
+    image_path: string;
 };
