@@ -24,6 +24,8 @@ export default function BeatForm() {
         try{
             let imageUrl = null;
             let audioUrl = null;
+            let imagePath = null;
+            let audioPath = null;
 
             if(imageFile) {
                 const { data, error } = await supabase.storage
@@ -32,6 +34,7 @@ export default function BeatForm() {
 
                 if (error) throw error
                 imageUrl = supabase.storage.from('beat-images').getPublicUrl(data.path).data.publicUrl;
+                imagePath = data.path;
             }
 
             if(audioFile) {
@@ -41,6 +44,7 @@ export default function BeatForm() {
 
                     if (error) throw error;
                     audioUrl = supabase.storage.from('beat-audio').getPublicUrl(data.path).data.publicUrl;
+                    audioPath = data.path;
             }
 
             const { error: insertError} = await supabase.from('beat_items').insert({
@@ -48,6 +52,8 @@ export default function BeatForm() {
                 price: parseFloat(price),
                 image_url: imageUrl,
                 audio_url: audioUrl,
+                image_path: imagePath,
+                audio_path: audioPath,
             })
 
             if (insertError) throw insertError

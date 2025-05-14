@@ -24,6 +24,40 @@ export const BeatListBackoffice = () => {
         try{
             if(!beat) return;
 
+            const audioPath = beat.audio_path ? decodeURIComponent(beat.audio_path) : null;
+            const imagePath = beat.image_path ? decodeURIComponent(beat.image_path) : null;
+
+            console.log("Decoded Audio path:", `"${audioPath}"`);
+            console.log("Decoded Image path:", `"${imagePath}"`);
+
+            if (audioPath) {
+                const { error: audioError, data: audioData } = await supabase
+                    .storage
+                    .from('beat-audio')
+                    .remove([audioPath]);
+
+                console.log("Audio delete result:", audioData);
+
+                if (audioError) {
+                    console.error("Failed to delete audio:", audioError.message);
+                    throw new Error("Audio deletion failed");
+                }
+            }
+
+            if (imagePath) {
+                const { error: imageError, data: imageData } = await supabase
+                    .storage
+                    .from('beat-images')
+                    .remove([imagePath]);
+
+                console.log("Image delete result:", imageData);
+
+                if (imageError) {
+                    console.error("Failed to delete image:", imageError.message);
+                    throw new Error("Image deletion failed");
+                }
+            }
+
             const {error} = await supabase.from('beat_items').delete().eq('id', beat.id);
             if (error) throw error;
             
@@ -35,6 +69,28 @@ export const BeatListBackoffice = () => {
         }
 
     }
+
+    const handleUpdate = async (beat: Beat) => {
+        const newTitle = prompt("Ny titel:", beat.title);
+        const newPrice = prompt("Nytt pris:", beat.price.toString());
+
+        if (!newTitle || !newPrice) return;
+
+        const { error } = await supabase
+            .from("beat_items")
+            .update({
+            title: newTitle,
+            price: parseFloat(newPrice),
+            })
+            .eq("id", beat.id);
+
+        if (error) {
+            console.error("Failed to update beat:", error);
+        } else {
+            console.log("Beat updated successfully.");
+            setLoad(true);
+        }
+    };
 
     return (
         <div className="w-full mt-6">
@@ -48,9 +104,9 @@ export const BeatListBackoffice = () => {
             <div key={beat.id} className="grid grid-cols-4 items-center border-b border-gray-200 py-2">
                 <p>{beat.title}</p>
                 <p>{beat.price}</p>
-                <p>{beat.audio_url.split('/').pop()?.split('-').slice(1).join('-')}</p>
+                <p>{decodeURIComponent(beat.audio_url.split('/').pop()?.split('-').slice(1).join('-') ?? '')}</p>
                 <div className="flex justify-center gap-3">
-                <button className="px-3 py-1 rounded bg-yellow-400 hover:bg-yellow-300 text-white text-sm cursor-pointer">Update</button>
+                <button onClick={() => handleUpdate(beat)} className="px-3 py-1 rounded bg-yellow-400 hover:bg-yellow-300 text-white text-sm cursor-pointer">Update</button>
                 <button onClick={() => handleDelete(beat)} className="px-3 py-1 rounded bg-red-500 hover:bg-red-400 text-white text-sm cursor-pointer">Delete</button>
                 </div>
             </div>
