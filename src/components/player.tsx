@@ -1,6 +1,5 @@
 import { Beat } from "@/types/beat";
 import React, { useEffect, useRef, useState } from "react";
-import H5AudioPlayer from "react-h5-audio-player";
 import { PlayIcon, PauseIcon, SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/outline";
 
 type customPlayerProps = {
@@ -14,6 +13,20 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
     const [isPlaying, setIsPlaying] = useState(true);
     const [volume, setVolume] = useState(0.75);
     const [isMuted, setIsMuted] = useState(false);
+
+    useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.code === "Space") {
+      e.preventDefault();
+      handlePlay();
+    }
+  };
+
+  window.addEventListener("keydown", handleKeyDown);
+  return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+}, [isPlaying]);
 
     const handlePlay = () => {
         if (isPlaying){

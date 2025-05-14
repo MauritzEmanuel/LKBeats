@@ -76,7 +76,6 @@ export default function BeatForm() {
         const file = e.target.files?.[0];
         if (!file) return;
       
-        // ✅ Validering
         if (!file.type.startsWith('audio/')) {
           setAudioError('Only audiofiles allowed.');
           return;
