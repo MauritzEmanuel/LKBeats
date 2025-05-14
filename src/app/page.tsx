@@ -15,9 +15,7 @@ export default function Home() {
 
   const router = useRouter()
 
-  const handleClick = () => {
-    router.push("/contact");
-  };
+
 
 
   return (
@@ -28,12 +26,26 @@ export default function Home() {
 
       <h1 className="font-jacq text-center text-5xl mt-14">Want to order a beat?</h1>
       <div className="h-15 w-60 rounded-4xl flex items-center justify-center mt-7 cursor-pointer"
-      onClick={handleClick}
+      onClick={() => router.push("/contact")}
       style={{
         backgroundImage: 'linear-gradient(to right, #C61ED9, #B20050 88%)',
       }}>
         <h1 className="text-center font-jacq text-white text-3xl">Contact Me</h1>
       </div>
+
+      <div className="mt-14 flex w-[90%] h-60 bg-secondary rounded-2xl items-center gap-5 outline-2 outline-primary">
+        <div className="h-50 w-50 rounded-xl outline-2 outline-primary ml-5">
+          <img src="/images/LuddeSMoke.jpg" alt="Ludde Pic" className="w-full h-full rounded-xl object-cover object-[center_30%]"/>
+        </div>
+        <div className="w-[70%]">
+          <p className="italic text-xl text-white font-serif font-bold">
+            "I started producing music out of curiosity — today, it’s who I am. Every track is a step closer to perfection."
+          </p>
+          <p className="text-xl text-white font-serif font-bold">— Ludde K</p>
+        </div>
+      </div>
+      <h1 className="text-4xl my-3">|</h1>
+      <button onClick={() => router.push("/credits")} className="w-35 h-12 mt-2 bg-primary text-lg text-white font-semibold rounded-xl cursor-pointer hover:opacity-80">About Ludde K</button>
 
       <div className="mt-50"></div>
       {selectedBeat && <CustomPlayer beat={selectedBeat} onClose={() => setSelectedBeat(null)}/>}
