@@ -33,7 +33,7 @@ export default function Home() {
         <h1 className="text-center font-jacq text-white text-3xl">Contact Me</h1>
       </div>
 
-      <div className="mt-14 flex w-[90%] h-60 bg-secondary rounded-2xl items-center gap-5 outline-2 outline-primary">
+      <div className="mt-18 flex w-[90%] h-60 bg-secondary rounded-2xl items-center gap-5 outline-2 outline-primary">
         <div className="h-50 w-50 rounded-xl outline-2 outline-primary ml-5">
           <img src="/images/LuddeSMoke.jpg" alt="Ludde Pic" className="w-full h-full rounded-xl object-cover object-[center_30%]"/>
         </div>
