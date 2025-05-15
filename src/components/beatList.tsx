@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
 import { Beat } from "@/types/beat";
+import {HashLoader} from "react-spinners";
+
 
 type BeatListProps = {
     onPlay: (beat: Beat) => void;
@@ -52,6 +54,7 @@ export const BeatList = ({onPlay}: BeatListProps) => {
                 <ArrowLeftCircleIcon className="h-20 w-20"/>
             </button>
 
+            {beats.length > 0 ? 
             <div ref={scrollRef} className="flex flex-row scroll-px-2 pl-2 py-5 gap-10 mt-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
                 {beats.map(beat => (
                     <div key={beat.id} className="flex snap-center flex-shrink-0 flex-col items-center outline-3 outline-primary w-55 h-85 rounded-xl">
@@ -81,6 +84,15 @@ export const BeatList = ({onPlay}: BeatListProps) => {
                     </div>
                 ))}
             </div>
+            : 
+            <div className="flex justify-center items-center mt-10">
+                <HashLoader 
+                color="#C61ED9"
+                speedMultiplier={2}/>
+            </div>
+            
+            }
+            
 
             <button
                 onClick={() => scroll('right')}

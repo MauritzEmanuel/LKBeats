@@ -22,6 +22,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-h5-audio-player": "^3.10.0-rc.1",
+    "react-spinners": "^0.17.0",
     "resend": "^4.5.1",
     "tailwindcss": "^4.1.5"
   },
