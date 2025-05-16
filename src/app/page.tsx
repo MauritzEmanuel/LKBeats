@@ -20,15 +20,16 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="font-jacq text-center text-5xl mt-14">Featured Tracks</h1>
+      <h1 className="font-jacq text-center text-5xl mt-14">Tracks</h1>
       <BeatList onPlay={handlePlay}/>
 
 
       <h1 className="font-jacq text-center text-5xl mt-14">Want to order a beat?</h1>
-      <div className="h-15 w-60 rounded-4xl flex items-center justify-center mt-7 cursor-pointer"
+      <div className="h-15 w-60 rounded-4xl flex items-center justify-center mt-7 cursor-pointer transition-all duration-500 bg-[length:200%_100%] bg-right hover:bg-left"
       onClick={() => router.push("/contact")}
       style={{
-        backgroundImage: 'linear-gradient(to right, #C61ED9, #B20050 88%)',
+        backgroundImage: "linear-gradient(to right, #C61ED9 0%, #C61ED9 50%, #B20050 51%, #B20050 100%)"
+
       }}>
         <h1 className="text-center font-jacq text-white text-3xl">Contact Me</h1>
       </div>

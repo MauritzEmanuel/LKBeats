@@ -21,7 +21,7 @@ export const BeatList = ({onPlay}: BeatListProps) => {
 
         if (!firstBeat) return;
 
-        const cardWidth = firstBeat.offsetWidth + 40;
+        const cardWidth = firstBeat.offsetWidth;
 
         scrollRef.current.scrollBy({
             left: direction === 'left' ? -cardWidth * 3 : cardWidth * 3,
@@ -92,7 +92,6 @@ export const BeatList = ({onPlay}: BeatListProps) => {
             </div>
             
             }
-            
 
             <button
                 onClick={() => scroll('right')}
