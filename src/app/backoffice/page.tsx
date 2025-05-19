@@ -18,7 +18,14 @@ export default function BackOffice() {
         return
         }
 
-        document.cookie = 'supabase-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+        await fetch('/api/auth/callback', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+            event: 'SIGNED_OUT',
+            session: null,
+            }),
+        });
         router.push('/login')
     }
 

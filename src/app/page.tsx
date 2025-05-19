@@ -25,7 +25,7 @@ export default function Home() {
 
 
       <h1 className="font-jacq text-center text-5xl mt-14">Want to order a beat?</h1>
-      <div className="h-15 w-60 rounded-4xl flex items-center justify-center mt-7 cursor-pointer transition-all duration-500 bg-[length:200%_100%] bg-right hover:bg-left"
+      <div className="h-15 w-60 rounded-4xl flex items-center justify-center mt-7 cursor-pointer transition-all duration-400 bg-[length:200%_100%] bg-right hover:bg-left"
       onClick={() => router.push("/contact")}
       style={{
         backgroundImage: "linear-gradient(to right, #C61ED9 0%, #C61ED9 50%, #B20050 51%, #B20050 100%)"
