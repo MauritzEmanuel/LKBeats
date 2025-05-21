@@ -2,6 +2,8 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
+
+//Not used anymore, kept for possible future use.
 export async function POST(request: Request) {
   const supabase = createRouteHandlerClient({ cookies })
 
@@ -18,7 +20,7 @@ export async function POST(request: Request) {
 
     response.headers.append(
       'Set-Cookie',
-      'sb-pngqxfmvpxljdrjiufrj-auth-token=; Path=/; HttpOnly; Secure; SameSite=Lax; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
+      'sb-SECRET-auth-token=; Path=/; HttpOnly; Secure; SameSite=Lax; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
     )
 
     return response
