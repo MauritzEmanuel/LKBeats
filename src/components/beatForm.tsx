@@ -4,7 +4,11 @@ import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import H5AudioPlayer from 'react-h5-audio-player';
 
-export default function BeatForm() {
+interface BeatFormProps {
+  setLoad: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const BeatForm: React.FC<BeatFormProps> = ({ setLoad }) => {
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [imageFile, setImageFile] = useState<File | null>(null);
@@ -73,6 +77,8 @@ export default function BeatForm() {
             setPrice('')
             setImageFile(null)
             setAudioFile(null)
+            setImagePreview(null)
+            setAudioPreview(null)
         }
         catch(err: any){
             console.error(err);
@@ -80,6 +86,7 @@ export default function BeatForm() {
         }
 
         setLoading(false);
+        setLoad(true)
     }
 
     const handleAudioChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -12,8 +12,8 @@ export const Header = () => {
 
 
     const Options = [
-        {name: "Contact", path: "/contact"},
-        {name: "Beats", path: "beats"},
+        {name: "Contact", path: "contact"},
+        {name: "Beats", path: "/"},
         {name: "Credits", path: "credits"},
     ];
 

@@ -21,10 +21,10 @@ export const BeatList = ({onPlay}: BeatListProps) => {
 
         if (!firstBeat) return;
 
-        const cardWidth = firstBeat.offsetWidth + 40;
+        const cardWidth = firstBeat.offsetWidth;
 
         scrollRef.current.scrollBy({
-            left: direction === 'left' ? -cardWidth * 3 : cardWidth * 3,
+            left: direction === 'left' ? -cardWidth * 5 : cardWidth * 5,
             behavior: "smooth",
         });
 
@@ -46,19 +46,19 @@ export const BeatList = ({onPlay}: BeatListProps) => {
     }, [])
 
     return(
-        <div className="relative w-full max-w-screen-xl mx-auto">
+        <div className="relative w-full max-w-screen-xl mx-auto flex items-center justify-between">
             <button
                 onClick={() => scroll('left')}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer opacity-20 hover:opacity-100"
+                className="cursor-pointer opacity-20 hover:opacity-100 h-20"
             >
                 <ArrowLeftCircleIcon className="h-20 w-20"/>
             </button>
 
             {beats.length > 0 ? 
-            <div ref={scrollRef} className="flex flex-row scroll-px-2 pl-2 py-5 gap-10 mt-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
+            <div ref={scrollRef} className="flex flex-row scroll-px-2 pl-2 py-5 gap-9 mt-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
                 {beats.map(beat => (
-                    <div key={beat.id} className="flex snap-center flex-shrink-0 flex-col items-center outline-3 outline-primary w-55 h-85 rounded-xl">
-                        <div className="relative w-45 h-45 mt-5 group">
+                    <div key={beat.id} className="flex snap-start flex-shrink-0 flex-col items-center outline-3 outline-primary w-48 h-75 rounded-xl">
+                        <div className="relative w-38 h-38 mt-5 group">
                             <img
                             src={beat.image_url}
                             alt="Cover"
@@ -74,10 +74,10 @@ export const BeatList = ({onPlay}: BeatListProps) => {
                                 <PlayCircleIcon className="w-16 h-16 text-primary drop-shadow-lg" />
                             </button>
                         </div>
-                        <div className="w-full ml-15 mt-1">
-                            <h1 className="text-xl font-semibold">{beat.title}</h1>
+                        <div className="w-full ml-11 mt-1">
+                            <h1 className="text-lg font-semibold">{beat.title}</h1>
                         </div>
-                        <div className="w-full ml-15">
+                        <div className="w-full ml-11">
                             <h1 className="text-sm font-small">{beat.price} SEK</h1>
                         </div>
                         <button className="w-40 h-10 bg-[#2DCEF6] text-white font-semibold rounded-3xl mt-auto mb-5 cursor-pointer">Add to cart</button>
@@ -92,11 +92,10 @@ export const BeatList = ({onPlay}: BeatListProps) => {
             </div>
             
             }
-            
 
             <button
                 onClick={() => scroll('right')}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer opacity-20 hover:opacity-100"
+                className="cursor-pointer opacity-20 hover:opacity-100 h-20"
             >
                 <ArrowRightCircleIcon className="h-20 w-20"/>
             </button>

@@ -32,33 +32,9 @@ export default function Login() {
         if (error) {
             setErrorMsg('Invalid email or password.');
             setIsSubmitting(false);
-        } else {
-            // Vänta på att sessionen ska sättas
-            const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-            if (sessionError) {
-                console.error('Error fetching session:', sessionError);
-                setErrorMsg('Something went wrong when fetching the session.');
-            } else {
-                console.log('Session after login:', sessionData?.session);
-    
-                if (sessionData?.session) {
-                    // Spara sessionen i cookies via backend
-                    await fetch('/api/auth/callback', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            event: 'SIGNED_IN',
-                            session: sessionData.session,
-                        }),
-                    });
-                
-                    router.push('/backoffice');
-                } else {
-                    setIsSubmitting(false);
-                    setErrorMsg('Session not found after login.');
-                }
-            }
-        }
+        } 
+
+        router.push('/backoffice');
     };
 
     return(

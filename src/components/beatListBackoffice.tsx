@@ -5,9 +5,13 @@ import { Beat } from "@/types/beat";
 import React, { useEffect, useState } from "react";
 import { UpdateModal } from "./updateModal";
 
-export const BeatListBackoffice = () => {
+interface BeatListProps {
+  load: boolean
+  setLoad: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const BeatListBackoffice: React.FC<BeatListProps> = ({ load, setLoad }) => {
     const [beats, setBeats] = useState<Beat[]>([]);
-    const [load, setLoad] = useState(true);
     const [selectedBeat, setSelectedBeat] = useState<Beat | null>(null);
 
 
