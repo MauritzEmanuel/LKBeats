@@ -1,15 +1,17 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import Image from 'next/image';
 import { Bars3Icon } from "@heroicons/react/16/solid";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import { Cart } from './cart';
+import { useCart } from '@/context/cartContext';
 
 export const Header = () => {
-
     const router = useRouter();
-
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    const { cartItems, removeFromCart } = useCart();
 
     const Options = [
         {name: "Contact", path: "contact"},
@@ -29,7 +31,17 @@ export const Header = () => {
                     onClick={() => router.push("/")}
                     className="cursor-pointer"
                 />
-                <ShoppingBagIcon className="size-9 mr-4"/>
+                <div className="relative">
+                    <ShoppingBagIcon 
+                        className="size-9 mr-4 cursor-pointer" 
+                        onClick={() => setIsCartOpen(true)}
+                    />
+                    {cartItems.length > 0 && (
+                        <span className="absolute -top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                            {cartItems.length}
+                        </span>
+                    )}
+                </div>
             </div>
             <div className="w-full bg-secondary h-[30px] flex justify-center">
                 <div className="w-[45%] h-full justify-between items-center flex flex-row px-6">
@@ -43,6 +55,12 @@ export const Header = () => {
                     )))}
                 </div>
             </div>
+            <Cart 
+                isOpen={isCartOpen}
+                onClose={() => setIsCartOpen(false)}
+                items={cartItems}
+                onRemoveItem={removeFromCart}
+            />
         </div>
     );
 }

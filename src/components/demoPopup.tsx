@@ -32,7 +32,7 @@ export const DemoPopup = () => {
                     All rights to the audio files and images on this site are reserved.
                 </p>
                 <p className="text-red-600 font-semibold mb-6">
-                Unauthorized use of any content will result in action being taken — including legal consequences.
+                Unauthorized use of any content will result in action being taken.
                 </p>
                 <button
                 onClick={handleAccept}
