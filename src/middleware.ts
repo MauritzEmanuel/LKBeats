@@ -1,23 +1,22 @@
-import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 
 export async function middleware(req: NextRequest) {
-  const res = NextResponse.next()
-  const supabase = createMiddlewareClient({ req, res })
+  console.log("MIDDLEWARE TRIGGERED");
+  
+  const tokenName = process.env.SUPABASE_AUTH_TOKEN!;
+  const token = req.cookies.get(tokenName)?.value
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user && req.nextUrl.pathname.startsWith('/backoffice')) {
+  if (!token && req.nextUrl.pathname.startsWith('/backoffice')) {
     const loginUrl = req.nextUrl.clone()
     loginUrl.pathname = '/login'
     return NextResponse.redirect(loginUrl)
   }
 
-  return res
+  // Du kan validera JWT token manuellt här om du vill
+
+  return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/backoffice'],
+  matcher: ['/backoffice/:path*'],
 }

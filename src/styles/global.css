@@ -9,6 +9,27 @@
     --font-jacq: 'Jacques Francois', ui-sans-serif, system-ui;
 }
 
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .audio-player {
+    width: 100%;
+    height: 100%;
+    color: black;
+    cursor: pointer;
+  }
+}
+
+
 .custom-player .rhap_time {
   display: flex;
   height: 100%;
@@ -44,3 +65,12 @@
 .custom-player .rhap_download-progress {
   display: none !important;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

@@ -4,7 +4,11 @@ import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import H5AudioPlayer from 'react-h5-audio-player';
 
-export default function BeatForm() {
+interface BeatFormProps {
+  setLoad: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const BeatForm: React.FC<BeatFormProps> = ({ setLoad }) => {
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [imageFile, setImageFile] = useState<File | null>(null);
@@ -16,6 +20,14 @@ export default function BeatForm() {
     const [audioPreview, setAudioPreview] = useState<string | null>(null);
     const [audioError, setAudioError] = useState('');
 
+
+    const sanitizeFileName = (fileName: string) => {
+        return fileName
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-zA-Z0-9.\-_]/g, ''); 
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -24,23 +36,29 @@ export default function BeatForm() {
         try{
             let imageUrl = null;
             let audioUrl = null;
+            let imagePath = null;
+            let audioPath = null;
 
             if(imageFile) {
+                const safeName = sanitizeFileName(imageFile.name);
                 const { data, error } = await supabase.storage
                     .from('beat-images')
-                    .upload(`images/${Date.now()}-${imageFile.name}`,imageFile)
+                    .upload(`images/${Date.now()}-${safeName}`,imageFile)
 
                 if (error) throw error
                 imageUrl = supabase.storage.from('beat-images').getPublicUrl(data.path).data.publicUrl;
+                imagePath = data.path;
             }
 
             if(audioFile) {
+                const safeName = sanitizeFileName(audioFile.name);
                 const { data, error } = await supabase.storage
                     .from('beat-audio')
-                    .upload(`audios/${Date.now()}-${audioFile.name}`, audioFile)
+                    .upload(`audios/${Date.now()}-${safeName}`, audioFile)
 
                     if (error) throw error;
                     audioUrl = supabase.storage.from('beat-audio').getPublicUrl(data.path).data.publicUrl;
+                    audioPath = data.path;
             }
 
             const { error: insertError} = await supabase.from('beat_items').insert({
@@ -48,6 +66,8 @@ export default function BeatForm() {
                 price: parseFloat(price),
                 image_url: imageUrl,
                 audio_url: audioUrl,
+                image_path: imagePath,
+                audio_path: audioPath,
             })
 
             if (insertError) throw insertError
@@ -57,6 +77,8 @@ export default function BeatForm() {
             setPrice('')
             setImageFile(null)
             setAudioFile(null)
+            setImagePreview(null)
+            setAudioPreview(null)
         }
         catch(err: any){
             console.error(err);
@@ -64,13 +86,13 @@ export default function BeatForm() {
         }
 
         setLoading(false);
+        setLoad(true)
     }
 
     const handleAudioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
       
-        // ✅ Validering
         if (!file.type.startsWith('audio/')) {
           setAudioError('Only audiofiles allowed.');
           return;
@@ -137,10 +159,7 @@ export default function BeatForm() {
                         ) : ('Upload Audio')}
                         {audioError && <p className="text-red-500 text-sm mt-2">{audioError}</p>}
                 </label>
-            </div>
-
-            
-
+            </div>            
 
             <input
                 className='bg-white text-black rounded my-1'

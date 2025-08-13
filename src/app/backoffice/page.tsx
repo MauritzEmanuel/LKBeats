@@ -1,11 +1,13 @@
 'use client'
 
-import BeatForm from "@/components/beatForm";
+import { BeatForm } from "@/components/beatForm";
+import { BeatListBackoffice } from "@/components/beatListBackoffice";
 import { supabase } from "@/lib/supabase"
 import { useRouter } from "next/navigation";
-import React from "react"
+import React, { useState } from "react"
 
 export default function BackOffice() {
+    const [load, setLoad] = useState(true)
 
     const router = useRouter();
 
@@ -17,14 +19,18 @@ export default function BackOffice() {
         return
         }
 
-        document.cookie = 'supabase-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
         router.push('/login')
     }
 
     return(
         <div className="flex flex-col justify-center items-center">
-            <div className="my-10">
-                <BeatForm/>
+
+            <div className="my-5">
+                <BeatForm setLoad={setLoad}/>
+            </div>
+
+            <div className="mb-5">
+                <BeatListBackoffice load={load} setLoad={setLoad}/>
             </div>
             
             <button
