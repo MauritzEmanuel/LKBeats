@@ -40,7 +40,7 @@ export default function Home() {
 
       <div className="mt-18 flex w-[90%] h-60 bg-secondary rounded-2xl items-center gap-5 outline-2 outline-primary">
         <div className="h-50 w-50 rounded-xl outline-2 outline-primary ml-5">
-          <img src="/images/LuddeSMoke.jpg" alt="Ludde Pic" className="w-full h-full rounded-xl object-cover object-[center_30%]"/>
+          <img src="/images/LuddeSmoke.jpg" alt="Ludde Pic" className="w-full h-full rounded-xl object-cover object-[center_30%]"/>
         </div>
         <div className="w-[70%]">
           <p className="italic text-xl text-white font-serif font-bold">
