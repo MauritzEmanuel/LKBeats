@@ -18,7 +18,13 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="font-jacq text-center text-5xl mt-14 underline underline-offset-7">Tracks</h1>
+      {/*<h1 className="font-jacq text-center text-5xl mt-14 underline underline-offset-7">Tracks</h1>*/}
+      <div className="w-85 h-40 mt-4 overflow-hidden flex items-center">
+        <img
+          src="/images/FeaturedTracksImage.png"
+          alt="Tracks"
+        />
+      </div>
       <BeatList onPlay={handlePlay}/>
 
 
