@@ -16,8 +16,6 @@ export default function Home() {
   const router = useRouter()
 
 
-
-
   return (
     <div className="flex flex-col items-center">
       <h1 className="font-jacq text-center text-5xl mt-14 underline underline-offset-7">Tracks</h1>

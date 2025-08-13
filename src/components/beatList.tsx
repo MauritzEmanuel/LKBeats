@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { Beat } from "@/types/beat";
 import {HashLoader} from "react-spinners";
 import { useCart } from "@/context/cartContext";
@@ -11,7 +12,7 @@ type BeatListProps = {
 export const BeatList = ({onPlay}: BeatListProps) => {
     const [ beats, setBeats ] = useState<Beat[]>([]);
     const scrollRef = useRef<HTMLDivElement>(null);
-    const { addToCart } = useCart();
+    const { cartItems, addToCart } = useCart();
 
     const scroll = (direction: 'left' | 'right') => {
         if(!scrollRef.current) return;
@@ -23,7 +24,7 @@ export const BeatList = ({onPlay}: BeatListProps) => {
         const cardWidth = firstBeat.offsetWidth;
 
         scrollRef.current.scrollBy({
-            left: direction === 'left' ? -cardWidth * 5 : cardWidth * 5,
+            left: direction === 'left' ? -cardWidth * 5.5 : cardWidth * 5.5,
             behavior: "smooth",
         });
     }
@@ -42,6 +43,10 @@ export const BeatList = ({onPlay}: BeatListProps) => {
 
         fetchData();
     }, [])
+
+    const isInCart = (beatId: number) => {
+        return cartItems.some(item => item.id === beatId);
+    };
 
     return(
         <div className="relative w-full max-w-screen-xl mx-auto flex items-center justify-between">
@@ -78,12 +83,19 @@ export const BeatList = ({onPlay}: BeatListProps) => {
                         <div className="w-full ml-11">
                             <h1 className="text-sm font-small">{beat.price} SEK</h1>
                         </div>
-                        <button 
-                            onClick={() => addToCart(beat)}
-                            className="w-40 h-10 bg-[#2DCEF6] text-white font-semibold rounded-3xl mt-auto mb-5 cursor-pointer hover:bg-[#2DCEF6]/90 transition-colors"
-                        >
-                            Add to cart
-                        </button>
+                        {isInCart(beat.id) ? (
+                            <div className="w-40 h-10 bg-green-500 text-white font-semibold rounded-3xl mt-auto mb-5 flex items-center justify-center transform transition-all duration-300 ease-in-out scale-100">
+                                <CheckCircleIcon className="w-6 h-6 mr-2" />
+                                Added
+                            </div>
+                        ) : (
+                            <button 
+                                onClick={() => addToCart(beat)}
+                                className="w-40 h-10 bg-[#2DCEF6] text-white font-semibold rounded-3xl mt-auto mb-5 cursor-pointer hover:bg-[#2DCEF6]/90 transition-all duration-300 ease-in-out transform hover:scale-105"
+                            >
+                                Add to cart
+                            </button>
+                        )}
                     </div>
                 ))}
             </div>

@@ -22,7 +22,7 @@ export const Header = () => {
     return(
         <div className="flex flex-col w-full">
             <div className="w-full bg-primary h-[80px] flex justify-between items-center">
-                <Bars3Icon className="size-9 ml-4"/>
+                <Bars3Icon className="size-9 ml-4 text-white"/>
                 <Image
                     src="/images/logo.png"
                     alt="Logotyp"
@@ -33,11 +33,11 @@ export const Header = () => {
                 />
                 <div className="relative">
                     <ShoppingBagIcon 
-                        className="size-9 mr-4 cursor-pointer" 
+                        className="size-9 mr-4 cursor-pointer text-white" 
                         onClick={() => setIsCartOpen(true)}
                     />
                     {cartItems.length > 0 && (
-                        <span className="absolute -top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                        <span className="absolute -top-1 right-1 bg-white text-black rounded-full w-5 h-5 flex items-center justify-center text-xs">
                             {cartItems.length}
                         </span>
                     )}
