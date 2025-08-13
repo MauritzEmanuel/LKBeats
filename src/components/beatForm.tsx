@@ -80,7 +80,7 @@ export const BeatForm: React.FC<BeatFormProps> = ({ setLoad }) => {
             setImagePreview(null)
             setAudioPreview(null)
         }
-        catch(err: any){
+        catch(err: unknown){
             console.error(err);
             setMessage('Something went wrong.');
         }

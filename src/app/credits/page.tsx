@@ -20,7 +20,7 @@ export default function Credits() {
                     <p className="text-white text-center text-lg">
                         Ludde K is an educated producer, mixer and songwriter based in Uppsala, Sweden.<br/>
                         Ludde started producing in 2019 and has actively evolved since, he is now educated and featured on multiple spotify tracks.<br/>
-                        Ludde is mostly known for his work on multiple of Mauritz tracks, sush as "Tabletten" - which he produced.<br/>
+                        Ludde is mostly known for his work on multiple of Mauritz tracks, sush as &quot;Tabletten&quot; - which he produced.<br/>
                     </p>
                 </div>
             </div>
