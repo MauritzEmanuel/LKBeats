@@ -44,7 +44,7 @@ export default function Home() {
         </div>
         <div className="w-[70%]">
           <p className="italic text-xl text-white font-serif font-bold">
-            "I started producing music out of curiosity — today, it’s who I am. Every track is a step closer to perfection."
+            &quot;I started producing music out of curiosity — today, it’s who I am. Every track is a step closer to perfection.&quot;
           </p>
           <p className="text-xl text-white font-serif font-bold">— Ludde K</p>
         </div>

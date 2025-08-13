@@ -7,12 +7,6 @@ import { HashLoader } from "react-spinners";
 
 export default function BeatsPage() {
     const [beats, setBeats] = useState<Beat[]>([]);
-    const [isPlaying, setIsPlaying] = useState<string | null>(null);
-
-    const handlePlay = (beat: Beat) => {
-        setIsPlaying(beat.id.toString());
-        // Add your audio playing logic here
-    };
 
     useEffect(() => {
         const fetchData = async () => {
