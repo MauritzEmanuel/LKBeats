@@ -43,9 +43,9 @@ export const BeatList = ({onPlay}: BeatListProps) => {
         const targetChild = children[targetIndex];
         if (targetChild) {
             targetChild.scrollIntoView({
-                behavior: 'smooth',   // smidig scroll
-                inline: 'center',     // horisontell positionering
-                block: 'nearest'      // vertikal positionering - "nearest" gör att den inte flyttar sidan upp/ner
+                behavior: 'smooth',
+                inline: 'center',
+                block: 'nearest'
             });
         }
     };
