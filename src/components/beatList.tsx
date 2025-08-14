@@ -65,7 +65,7 @@ export const BeatList = ({onPlay}: BeatListProps) => {
             </button>
 
             {beats.length > 0 ? 
-            <div ref={scrollRef} className="flex flex-row scroll-px-2 max-sm:scroll-px-3 max-lg:scroll-px-4 max-lg:pl-10 max-sm:pl-30 pl-2 py-5 gap-9 mt-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
+            <div ref={scrollRef} className="flex flex-row scroll-px-2 max-sm:scroll-px-4 max-sm:pl-50 max-lg:scroll-px-4 max-lg:pl-10  pl-2 py-5 gap-9 mt-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
                 {beats.map(beat => (
                     <div key={beat.id} className="flex snap-start flex-shrink-0 flex-col items-center outline-3 outline-primary w-48 max-sm:w-48 max-lg:w-42 h-75 rounded-xl">
                         <div className="relative w-38 h-38 mt-5 group">
