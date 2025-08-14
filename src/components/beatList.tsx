@@ -23,8 +23,15 @@ export const BeatList = ({onPlay}: BeatListProps) => {
 
         const cardWidth = firstBeat.offsetWidth;
 
+        let cardsPerScroll = 5.5; // default laptop L
+        if (window.innerWidth < 640) {
+            cardsPerScroll = 1; // mobil
+        } else if (window.innerWidth < 1024) {
+            cardsPerScroll = 3.5; // tablet
+        }
+
         scrollRef.current.scrollBy({
-            left: direction === 'left' ? -cardWidth * 5.5 : cardWidth * 5.5,
+            left: direction === 'left' ? -cardWidth * cardsPerScroll : cardWidth * cardsPerScroll,
             behavior: "smooth",
         });
     }
@@ -58,9 +65,9 @@ export const BeatList = ({onPlay}: BeatListProps) => {
             </button>
 
             {beats.length > 0 ? 
-            <div ref={scrollRef} className="flex flex-row scroll-px-2 pl-2 py-5 gap-9 mt-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
+            <div ref={scrollRef} className="flex flex-row scroll-px-2 max-sm:scroll-px-4 max-sm:pl-50 max-lg:scroll-px-4 max-lg:pl-10  pl-2 py-5 gap-9 mt-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
                 {beats.map(beat => (
-                    <div key={beat.id} className="flex snap-start flex-shrink-0 flex-col items-center outline-3 outline-primary w-48 h-75 rounded-xl">
+                    <div key={beat.id} className="flex snap-start flex-shrink-0 flex-col items-center outline-3 outline-primary w-48 max-sm:w-48 max-lg:w-42 h-75 rounded-xl">
                         <div className="relative w-38 h-38 mt-5 group">
                             <img
                             src={beat.image_url}
