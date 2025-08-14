@@ -24,7 +24,7 @@ export const Header = () => {
             <div className="w-full bg-primary h-[80px] flex justify-between items-center">
                 <Bars3Icon className="size-9 ml-4 text-white"/>
                 <Image
-                    src="/images/logo.png"
+                    src="/images/Logo.png"
                     alt="Logotyp"
                     width={90}
                     height={90}
