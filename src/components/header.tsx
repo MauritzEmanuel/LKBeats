@@ -44,11 +44,11 @@ export const Header = () => {
                 </div>
             </div>
             <div className="w-full bg-secondary h-[30px] flex justify-center">
-                <div className="w-[45%] h-full justify-between items-center flex flex-row px-6">
+                <div className="w-[45%] max-sm:w-[90%] max-lg:w-[60%] h-full justify-between items-center flex flex-row px-6">
                     {Options.map((option => (
                         <div
                             key={option.name}
-                            className="h-5.5 w-20 cursor-pointer text-black hover:text-primary bg-white flex justify-center items-center rounded-4xl"
+                            className="h-5.5  w-20 cursor-pointer text-black hover:text-primary bg-white flex justify-center items-center rounded-4xl"
                             onClick={() => router.push(option.path)}>
                             <h3 className="text-center">{option.name}</h3>
                         </div>
