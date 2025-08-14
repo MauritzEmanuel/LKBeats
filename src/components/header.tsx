@@ -7,11 +7,15 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 import { Cart } from './cart';
 import { useCart } from '@/context/cartContext';
+import { Navbar } from "./navbar";
 
 export const Header = () => {
     const router = useRouter();
+
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { cartItems, removeFromCart } = useCart();
+
+    const [isNavbaropen, setIsNavbarOpen] = useState(false);
 
     const Options = [
         {name: "Contact", path: "contact"},
@@ -22,7 +26,7 @@ export const Header = () => {
     return(
         <div className="flex flex-col w-full">
             <div className="w-full bg-primary h-[80px] flex justify-between items-center">
-                <Bars3Icon className="size-9 ml-4 text-white"/>
+                <Bars3Icon className="size-9 ml-4 text-white" onClick={() => setIsNavbarOpen(true)}/>
                 <Image
                     src="/images/Logo.png"
                     alt="Logotyp"
@@ -60,6 +64,10 @@ export const Header = () => {
                 onClose={() => setIsCartOpen(false)}
                 items={cartItems}
                 onRemoveItem={removeFromCart}
+            />
+            <Navbar
+                isOpen={isNavbaropen}
+                onClose={() => setIsNavbarOpen(false)}
             />
         </div>
     );
