@@ -25,6 +25,7 @@ export default function Home() {
         />
       </div>
       <BeatList onPlay={handlePlay}/>
+      <p className="mt-2 text-sm opacity-40 hidden max-lg:block">Tap on cover to play beat</p>
 
 
       <h1 className="font-jacq text-center text-5xl max-sm:text-4xl mt-14">Want to order a beat?</h1>
