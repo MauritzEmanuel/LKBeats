@@ -1,4 +1,5 @@
 'use client'
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 
 export const ContactForm = () => {
@@ -61,12 +62,16 @@ export const ContactForm = () => {
 
 
     return(
-        <form 
+        <motion.form 
         onSubmit={handleSubmit} 
         style={{
             boxShadow: '0px 0px 20px rgba(198, 30, 217, 0.6)'
         }}
-        className="text-white bg-secondary flex flex-col w-200 max-lg:w-[90%] py-4 my-10 items-center rounded-2xl">
+        className="text-white bg-secondary flex flex-col w-200 max-lg:w-[90%] py-4 my-10 items-center rounded-2xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        >
             <h1 className="text-3xl mb-2 font-jacq font-medium">Beat Request</h1>
             <p className="font-semibold">Come in contact with Ludde K!</p>
             <p className="text-center w-[70%] max-lg:w-[90%] my-2">The request should contain an information of how you would like your beat. Give examples of inspiration, genre, tempo, vibe etc.</p>
@@ -88,6 +93,6 @@ export const ContactForm = () => {
             </div>
             <button disabled={isDisabled} type="submit" className="w-20 rounded bg-green-500 cursor-pointer hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50">Send</button>
             {formMessage && formMessage}
-        </form>
+        </motion.form>
     )
 }

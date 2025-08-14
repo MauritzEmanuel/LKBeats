@@ -79,7 +79,7 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
     return(
         <div style={{
             boxShadow: '0px 0px 20px rgba(198, 30, 217, 0.6)'
-        }} className="fixed flex justify-between items-center bottom-5 w-120 max-sm:w-80 h-15 mx-auto bg-white rounded-2xl animate-[fadeUp_0.3s_ease-out]">
+        }} className="fixed flex justify-between items-center bottom-5 max-lg:bottom-8 w-120 max-sm:w-80 h-15 mx-auto bg-white rounded-2xl animate-[fadeUp_0.3s_ease-out] ">
             <audio ref={audioRef} src={beat.audio_url} autoPlay/>
             <div className="h-[100%] w-[40%] flex flex-row items-center">
                 <img className="aspect-square object-cover h-[75%] mx-3 rounded" src={beat.image_url} 
@@ -104,10 +104,10 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
             </button>
             <div className="h-[80%] w-[40%] flex justify-end">
                 <button onClick={handleMute} className="cursor-pointer">
-                    {!isMuted ? <SpeakerWaveIcon className="h-7 w-7 mr-2"/> : <SpeakerXMarkIcon className="h-7 w-7 mr-2"/>}
+                    {!isMuted ? <SpeakerWaveIcon className="h-7 w-7 mr-2 max-lg:mr-5"/> : <SpeakerXMarkIcon className="h-7 w-7 mr-2 max-lg:mr-5"/>}
                 </button>
                 <input 
-                className="w-20 max-sm:w-13 mr-3"
+                className="w-20 hidden lg:block mr-3"
                 value={volume}
                 onChange={handleVolume}
                 type="range"
