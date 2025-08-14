@@ -18,7 +18,6 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
-      {/*<h1 className="font-jacq text-center text-5xl mt-14 underline underline-offset-7">Tracks</h1>*/}
       <div className="w-85 h-40 mt-4 overflow-hidden flex items-center">
         <img
           src="/images/FeaturedTracksImage.png"
@@ -26,9 +25,10 @@ export default function Home() {
         />
       </div>
       <BeatList onPlay={handlePlay}/>
+      <p className="mt-2 text-sm opacity-40 hidden max-lg:block">Tap on cover to play beat</p>
 
 
-      <h1 className="font-jacq text-center text-5xl mt-14">Want to order a beat?</h1>
+      <h1 className="font-jacq text-center text-5xl max-sm:text-4xl mt-14">Want to order a beat?</h1>
       <div className="h-15 w-60 rounded-4xl flex items-center justify-center mt-7 cursor-pointer transition-all duration-400 bg-[length:200%_100%] bg-right hover:bg-left"
       onClick={() => router.push("/contact")}
       style={{
@@ -43,7 +43,7 @@ export default function Home() {
           <img src="/images/LuddeSmoke.jpg" alt="Ludde Pic" className="w-full h-full rounded-xl object-cover object-[center_30%]"/>
         </div>
         <div className="w-[70%]">
-          <p className="italic text-xl text-white font-serif font-bold">
+          <p className="italic text-xl max-sm:text-base text-white font-serif font-bold">
             &quot;I started producing music out of curiosity — today, it’s who I am. Every track is a step closer to perfection.&quot;
           </p>
           <p className="text-xl text-white font-serif font-bold">— Ludde K</p>
