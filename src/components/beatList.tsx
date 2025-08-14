@@ -15,26 +15,40 @@ export const BeatList = ({onPlay}: BeatListProps) => {
     const { cartItems, addToCart } = useCart();
 
     const scroll = (direction: 'left' | 'right') => {
-        if(!scrollRef.current) return;
+        if (!scrollRef.current) return;
 
-        const firstBeat = scrollRef.current.children[0].nextElementSibling as HTMLElement;
+        const container = scrollRef.current;
+        const children = Array.from(container.children) as HTMLElement[];
 
-        if (!firstBeat) return;
+        const firstVisibleIndex = children.findIndex(child => {
+            const rect = child.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            return rect.right > containerRect.left + 1;
+        });
 
-        const cardWidth = firstBeat.offsetWidth;
-
-        let cardsPerScroll = 5.5; // default laptop L
-        if (window.innerWidth < 640) {
-            cardsPerScroll = 1; // mobil
-        } else if (window.innerWidth < 1024) {
-            cardsPerScroll = 3.5; // tablet
+        const width = window.innerWidth;
+        let step;
+        if (width <= 640) {
+            step = 1; // mobile
+        } else if (width <= 1024) {
+            step = 4; // tablet
+        } else {
+            step = 7; // desktop
         }
 
-        scrollRef.current.scrollBy({
-            left: direction === 'left' ? -cardWidth * cardsPerScroll : cardWidth * cardsPerScroll,
-            behavior: "smooth",
-        });
-    }
+
+        let targetIndex = direction === 'left' ? firstVisibleIndex - step : firstVisibleIndex + step;
+        targetIndex = Math.max(0, Math.min(children.length - 1, targetIndex));
+
+        const targetChild = children[targetIndex];
+        if (targetChild) {
+            targetChild.scrollIntoView({
+                behavior: 'smooth',   // smidig scroll
+                inline: 'center',     // horisontell positionering
+                block: 'nearest'      // vertikal positionering - "nearest" gör att den inte flyttar sidan upp/ner
+            });
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
