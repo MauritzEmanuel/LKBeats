@@ -23,9 +23,8 @@ const itemVariants = {
 };
 
 export const Navbar = ({isOpen, onClose}: NavProps) => {
-    if (!isOpen) return null;
-
     const router = useRouter();
+    if (!isOpen) return null;
 
     const menuItems = [
         {name: 'Home', path: '/', color: 'outline-violet-500'},
