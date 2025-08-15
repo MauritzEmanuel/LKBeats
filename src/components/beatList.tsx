@@ -86,7 +86,7 @@ export const BeatList = ({onPlay}: BeatListProps) => {
                             <img
                             src={beat.image_url}
                             alt="Cover"
-                            className="w-full h-full object-cover rounded-2xl"
+                            className="w-full h-full object-cover rounded-2xl select-none"
                             style={{
                                 boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)'
                             }}
@@ -112,7 +112,7 @@ export const BeatList = ({onPlay}: BeatListProps) => {
                         ) : (
                             <button 
                                 onClick={() => addToCart(beat)}
-                                className="w-40 h-10 bg-[#2DCEF6] text-white font-semibold rounded-3xl mt-auto mb-5 cursor-pointer hover:bg-[#2DCEF6]/90 transition-all duration-300 ease-in-out transform hover:scale-105"
+                                className="w-40 h-10 bg-[#2DCEF6] text-white font-semibold rounded-3xl mt-auto mb-5 cursor-pointer hover:bg-[#2DCEF6]/90 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-105 select-none"
                             >
                                 Add to cart
                             </button>
