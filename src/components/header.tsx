@@ -25,8 +25,8 @@ export const Header = () => {
 
     return(
         <div className="flex flex-col w-full">
-            <div className="w-full bg-primary h-[80px] flex justify-between items-center">
-                <Bars3Icon className="size-9 ml-4 text-white" onClick={() => setIsNavbarOpen(true)}/>
+            <div className="w-full bg-primary h-[80px] flex justify-between items-center max-lg:shadow-md">
+                <Bars3Icon className="size-9 ml-4 text-white cursor-pointer" onClick={() => setIsNavbarOpen(true)}/>
                 <Image
                     src="/images/Logo.png"
                     alt="Logotyp"
@@ -47,7 +47,7 @@ export const Header = () => {
                     )}
                 </div>
             </div>
-            <div className="w-full bg-secondary h-[30px] flex justify-center">
+            <div className="w-full bg-secondary h-[30px] hidden lg:flex justify-center">
                 <div className="w-[45%] max-sm:w-[90%] max-lg:w-[60%] h-full justify-between items-center flex flex-row px-6">
                     {Options.map((option => (
                         <div
