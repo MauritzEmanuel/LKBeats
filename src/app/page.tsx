@@ -29,7 +29,7 @@ export default function Home() {
 
 
       <h1 className="font-jacq text-center text-5xl max-sm:text-4xl mt-14">Want to order a beat?</h1>
-      <div className="h-15 w-60 rounded-4xl flex items-center justify-center mt-7 cursor-pointer transition-all duration-400 bg-[length:200%_100%] bg-right hover:bg-left"
+      <div className="h-15 w-60 rounded-4xl flex items-center justify-center mt-7 cursor-pointer transition-all transition-200 lg:duration-400 bg-[length:200%_100%] bg-right hover:bg-left active:scale-110 active:bg-left select-none"
       onClick={() => router.push("/contact")}
       style={{
         backgroundImage: "linear-gradient(to right, #C61ED9 0%, #C61ED9 50%, #B20050 51%, #B20050 100%)"
@@ -50,7 +50,9 @@ export default function Home() {
         </div>
       </div>
       <h1 className="text-4xl my-3">|</h1>
-      <button onClick={() => router.push("/credits")} className="w-35 h-12 mt-2 bg-primary text-lg text-white font-semibold rounded-xl cursor-pointer hover:opacity-80">About Ludde K</button>
+      <button onClick={() => router.push("/credits")} className="w-35 h-12 mt-2 bg-primary text-lg text-white font-semibold rounded-xl cursor-pointer hover:opacity-80 active:scale-105 select-none">
+        About Ludde K
+      </button>
 
       <div className="mt-50"></div>
       {selectedBeat && <CustomPlayer beat={selectedBeat} onClose={() => setSelectedBeat(null)}/>}
