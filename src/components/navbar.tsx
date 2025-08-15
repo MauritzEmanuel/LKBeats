@@ -28,7 +28,7 @@ export const Navbar = ({isOpen, onClose}: NavProps) => {
 
     const menuItems = [
         {name: 'Home', path: '/', color: 'outline-violet-500'},
-        {name: 'Beats', path: '/beats', color: 'outline-violet-600'},
+        {name: 'Beats', path: '/', color: 'outline-violet-600'},
         {name: 'Contact', path: '/contact', color: 'outline-violet-700'},
         {name: 'Credits', path: '/credits', color: 'outline-violet-800'}
     ]
