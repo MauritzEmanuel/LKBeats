@@ -15,26 +15,40 @@ export const BeatList = ({onPlay}: BeatListProps) => {
     const { cartItems, addToCart } = useCart();
 
     const scroll = (direction: 'left' | 'right') => {
-        if(!scrollRef.current) return;
+        if (!scrollRef.current) return;
 
-        const firstBeat = scrollRef.current.children[0].nextElementSibling as HTMLElement;
+        const container = scrollRef.current;
+        const children = Array.from(container.children) as HTMLElement[];
 
-        if (!firstBeat) return;
+        const firstVisibleIndex = children.findIndex(child => {
+            const rect = child.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            return rect.right > containerRect.left + 1;
+        });
 
-        const cardWidth = firstBeat.offsetWidth;
-
-        let cardsPerScroll = 5.5; // default laptop L
-        if (window.innerWidth < 640) {
-            cardsPerScroll = 1; // mobil
-        } else if (window.innerWidth < 1024) {
-            cardsPerScroll = 3.5; // tablet
+        const width = window.innerWidth;
+        let step;
+        if (width <= 640) {
+            step = 1; // mobile
+        } else if (width <= 1024) {
+            step = 4; // tablet
+        } else {
+            step = 7; // desktop
         }
 
-        scrollRef.current.scrollBy({
-            left: direction === 'left' ? -cardWidth * cardsPerScroll : cardWidth * cardsPerScroll,
-            behavior: "smooth",
-        });
-    }
+
+        let targetIndex = direction === 'left' ? firstVisibleIndex - step : firstVisibleIndex + step;
+        targetIndex = Math.max(0, Math.min(children.length - 1, targetIndex));
+
+        const targetChild = children[targetIndex];
+        if (targetChild) {
+            targetChild.scrollIntoView({
+                behavior: 'smooth',
+                inline: 'center',
+                block: 'nearest'
+            });
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -72,7 +86,7 @@ export const BeatList = ({onPlay}: BeatListProps) => {
                             <img
                             src={beat.image_url}
                             alt="Cover"
-                            className="w-full h-full object-cover rounded-2xl"
+                            className="w-full h-full object-cover rounded-2xl select-none"
                             style={{
                                 boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)'
                             }}
@@ -98,7 +112,7 @@ export const BeatList = ({onPlay}: BeatListProps) => {
                         ) : (
                             <button 
                                 onClick={() => addToCart(beat)}
-                                className="w-40 h-10 bg-[#2DCEF6] text-white font-semibold rounded-3xl mt-auto mb-5 cursor-pointer hover:bg-[#2DCEF6]/90 transition-all duration-300 ease-in-out transform hover:scale-105"
+                                className="w-40 h-10 bg-[#2DCEF6] text-white font-semibold rounded-3xl mt-auto mb-5 cursor-pointer hover:bg-[#2DCEF6]/90 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-105 select-none"
                             >
                                 Add to cart
                             </button>
