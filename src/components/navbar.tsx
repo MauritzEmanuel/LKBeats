@@ -3,6 +3,7 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 import React from "react";
 
 type NavProps = {
@@ -45,8 +46,15 @@ export const Navbar = ({isOpen, onClose}: NavProps) => {
                             <XMarkIcon className="w-8 h-8" />
                         </button>
                     </div>
+                    <Image
+                            src="/images/LkLogoBlack.png"
+                            alt="Logotyp"
+                            width={90}
+                            height={90}
+                            className="flex self-center"
+                        />
                     <motion.nav
-                    className="h-full flex flex-col items-center justify-center gap-5"
+                    className="h-full flex flex-col items-center justify-center gap-5 mb-20"
                     initial="closed"
                     animate="open"
                     variants={navVariants}>
