@@ -2,7 +2,7 @@
 import { BeatList } from "@/components/beatList";
 import { CustomPlayer } from "@/components/player";
 import { Beat } from "@/types/beat";
-import { easeInOut, easeOut, motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
