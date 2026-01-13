@@ -57,7 +57,7 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
             audioRef.current.volume = newVolume;
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         if(!isPlaying){
             inactivityRef.current = setTimeout(() => {
                 onClose();
@@ -73,7 +73,7 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
         return () => {
             if (inactivityRef.current) clearTimeout(inactivityRef.current);
         };
-    }, [isPlaying])
+    }, [isPlaying])*/
 
 
     if(!beat) return null;
@@ -85,10 +85,10 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
         style={{
             boxShadow: '0px 0px 20px rgba(198, 30, 217, 0.6)'
         }} className={ 
-        `fixed flex justify-between items-center max-lg:bottom-8 mx-auto bg-white rounded-2xl animate-[fadeUp_0.3s_ease-out] ${isExpanded ? "bottom-20 w-200 h-100" : "bottom-5 w-120 max-sm:w-80 h-15"}`}>
+        `fixed flex justify-between items-center max-lg:bottom-8 mx-auto bg-white rounded-2xl animate-[fadeUp_0.3s_ease-out] ${isExpanded ? "bottom-20 w-200 h-100 flex-col" : "bottom-5 w-120 max-sm:w-80 h-15"}`}>
             <audio ref={audioRef} src={beat.audio_url} autoPlay/>
-            <div className="h-[100%] w-[40%] flex flex-row items-center">
-                <motion.img layout className={`aspect-square object-cover mx-3 rounded ${!isExpanded ? "h-[75%]" : "h-[75%]"}`} src={beat.image_url} 
+            <div className={`flex items-center ${isExpanded ? "flex-col w-full justify-center items-start h-[80%]" : "flex-row w-[40%] h-[100%]"}`}>
+                <motion.img layout className={`aspect-square object-cover mx-3 rounded ${!isExpanded ? "h-[75%]" : "h-[50%]"}`} src={beat.image_url} 
                     style={{
                         boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)'
                     }}
@@ -101,11 +101,13 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
                     </>
                     }
                     
-                    <motion.h1 layout className="font-medium max-sm:text-xs">{beat.title}</motion.h1>
+                    <motion.h1 layout className={`font-medium max-sm:text-xs ${isExpanded && "ml-3"}`}>{beat.title}</motion.h1>
                 </div>
             </div>
             
-            <motion.button layout onClick={(e)=> {
+            {!isExpanded ?
+            <>
+                <motion.button layout onClick={(e)=> {
                 e.stopPropagation()
                 handlePlay()}} className=" flex items-center justify-center cursor-pointer">
                 {
@@ -133,6 +135,42 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
                 step="0.01"
                 />
             </div>
-        </motion.div>
+        </> :
+            
+            <div className="flex flex-row w-full items-center justify-around self-end mb-5">
+            
+                <motion.button layout onClick={(e)=> {
+                e.stopPropagation()
+                handlePlay()}} className=" flex items-center justify-center cursor-pointer">
+                {
+                    isPlaying ?
+                    <PauseIcon className=" w-10 h-10"/> 
+                    : 
+                    <PlayIcon className=" w-10 h-10"/>
+                }
+            </motion.button>
+            <div className="h-[80%] w-[40%] flex justify-end">
+                <button onClick={(e) => {
+                    e.stopPropagation()
+                    handleMute()
+                }} className="cursor-pointer">
+                    {!isMuted ? <SpeakerWaveIcon className="h-7 w-7 mr-2 max-lg:mr-5"/> : <SpeakerXMarkIcon className="h-7 w-7 mr-2 max-lg:mr-5"/>}
+                </button>
+                <input 
+                className="w-20 hidden lg:block mr-3"
+                value={volume}
+                onClick={(e) => e.stopPropagation()}
+                onChange={handleVolume}
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                />
+            </div>
+            
+            </div>
+            }
+            </motion.div>
+            
     )
 }
