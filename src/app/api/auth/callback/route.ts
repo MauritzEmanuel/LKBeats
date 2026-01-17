@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 
 
 //Not used anymore, kept for possible future use.
-/*export async function POST(request: Request) {
+export async function POST(request: Request) {
   const supabase = createRouteHandlerClient({ cookies })
 
   const { event, session } = await request.json()
@@ -27,4 +27,4 @@ import { NextResponse } from 'next/server'
   }
 
   return NextResponse.json({ success: true })
-}*/
+}
