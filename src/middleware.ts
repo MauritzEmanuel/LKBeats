@@ -12,8 +12,6 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  // Du kan validera JWT token manuellt här om du vill
-
   return NextResponse.next()
 }
 
