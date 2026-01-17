@@ -57,7 +57,7 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
             audioRef.current.volume = newVolume;
     }
 
-    /*useEffect(() => {
+    useEffect(() => {
         if(!isPlaying){
             inactivityRef.current = setTimeout(() => {
                 onClose();
@@ -73,7 +73,7 @@ export const CustomPlayer = ({ beat, onClose }: customPlayerProps) => {
         return () => {
             if (inactivityRef.current) clearTimeout(inactivityRef.current);
         };
-    }, [isPlaying])*/
+    }, [isPlaying])
 
 
     if(!beat) return null;
